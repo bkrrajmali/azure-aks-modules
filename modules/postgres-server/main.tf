@@ -46,7 +46,15 @@ resource "azurerm_postgresql_flexible_server" "this" {
       start_minute = maintenance_window.value.start_minute
     }
   }
+    dynamic "authentication" {
+    for_each = var.entra_auth_enabled ? [1] : []
 
+    content {
+      active_directory_auth_enabled = true
+      password_auth_enabled         = var.password_auth_enabled
+      tenant_id                     = var.tenant_id
+    }
+  }
   tags = var.tags
 
   lifecycle {
