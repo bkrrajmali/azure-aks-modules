@@ -96,3 +96,21 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "entra_auth_enabled" {
+  description = "Enables Microsoft Entra authentication. Required before an Entra administrator can be assigned."
+  type        = bool
+  default     = false
+}
+
+variable "password_auth_enabled" {
+  description = "Keep true unless you have moved every consumer to Entra tokens."
+  type        = bool
+  default     = true
+}
+
+variable "tenant_id" {
+  description = "Entra tenant. Required when entra_auth_enabled is true."
+  type        = string
+  default     = null
+}
